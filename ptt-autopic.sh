@@ -1,6 +1,5 @@
 #!/bin/sh
 
-IMAGE_REGX="http:\/\/i.imgur.com\/"
 PIC_CACHE_DIR="`dirname $0`/pic_cache";
 init() {
     if [ -d "$PIC_CACHE_DIR" ]; then
@@ -10,12 +9,14 @@ init() {
     fi
 }
 
-download_image() {
-    wget -nc -P $PIC_CACHE_DIR $1 > /dev/null 2>&1
+download_show_image() {
+    url="http://i.imgur.com/$1"
+    wget -nc -P $PIC_CACHE_DIR $url > /dev/null 2>&1
+    imgcat $PIC_CACHE_DIR/$1
 }
 
 export PIC_CACHE_DIR
-export -f download_image
+export -f download_show_image
 
 
 find_images() {
@@ -26,11 +27,10 @@ find_images() {
         if($3=="i.imgur.com") {
             gsub(/jpg.*$/,"jpg",$4)
             gsub(/png.*$/,"png",$4)
-            system("download_image "$3"/"$4)
-            system("imgcat " "./pic_cache/"$4)
+            system("download_show_image "$4)
         }
     }
-    '
+    ' 2> /dev/null
 }
 
 init
