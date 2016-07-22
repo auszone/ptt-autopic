@@ -24,7 +24,7 @@ find_images() {
     BEGIN{FS="\/"}
     {
         print
-        if($3=="i.imgur.com") {
+        if($3 ~ "imgur.com") {
             gsub(/jpg.*$/,"jpg",$4)
             gsub(/png.*$/,"png",$4)
             system("download_show_image "$4)
