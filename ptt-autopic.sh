@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PIC_CACHE_DIR="`dirname $0`/pic_cache";
+PIC_CACHE_DIR="$HOME/.bin/ptt-autopic.cache";
 init() {
     if [ -d "$PIC_CACHE_DIR" ]; then
         echo "$PIC_CACHE_DIR already exists";
