@@ -1,36 +1,38 @@
 #!/bin/sh
 
 IMAGE_REGX="http:\/\/i.imgur.com\/"
-DIR="`dirname $0`/pic_cache";
+PIC_CACHE_DIR="`dirname $0`/pic_cache";
 init() {
-    if [ -d "$DIR" ]; then
-        echo "$DIR already exists";
+    if [ -d "$PIC_CACHE_DIR" ]; then
+        echo "$PIC_CACHE_DIR already exists";
     else
-        mkdir $DIR;
+        mkdir $PIC_CACHE_DIR;
     fi
 }
 
-find_images() {
-    IMAGE_URLS=$(awk '
-    {
-        if($0 ~ "http:\/\/i.imgur.com\/") {
-            print
-
-        }
-    else {
-    }
-}')
+download_image() {
+    wget -nc -P $PIC_CACHE_DIR $1 > /dev/null 2>&1
 }
 
-download_images() {
-    for i in "${IMAGE_URLS[@]}"
-    do
-        wget -nc -P $DIR $i > /dev/null 2>&1 &
-    done
+export PIC_CACHE_DIR
+export -f download_image
+
+
+find_images() {
+    awk '
+    BEGIN{FS="\/"}
+    {
+        print
+        if($3=="i.imgur.com") {
+            gsub(/jpg.*$/,"jpg",$4)
+            gsub(/png.*$/,"png",$4)
+            system("download_image "$3"/"$4)
+            system("imgcat " "./pic_cache/"$4)
+        }
+    }
+    '
 }
 
 init
 find_images
-download_images
-
 
