@@ -11,7 +11,7 @@ Directly show images on iTerm2 with [imgcat](https://www.iterm2.com/documentatio
 
 `ssh bbsu@ptt.cc | ptt-autopic`
 
-You can also make it an alias by add the following line to your .*rc files.
+You can also make it an alias by adding the following line to your .*rc files.
 
 `alias ssh-ptt-autopic="ssh bbsu@ptt.cc | ptt-autopic"`
 
