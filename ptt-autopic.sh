@@ -23,12 +23,14 @@ find_images() {
     awk '
     BEGIN{FS="\/"}
     {
-        print
         if($3 ~ "imgur.com") {
+            printf "\n\nDownload image : %s\n\n", $0
             gsub(/jpg.*$/,"jpg",$4)
             gsub(/png.*$/,"png",$4)
             system("download_show_image "$4)
-        }
+        } else {
+        print
+    }
     }
     ' 2> /dev/null
 }
