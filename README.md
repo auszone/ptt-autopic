@@ -1,5 +1,10 @@
 # ptt-autopic
 Directly show images on iTerm2 with [imgcat](https://www.iterm2.com/documentation-images.html) when browsing ptt.cc with ssh.
+
+## ScreenShot
+
+![Screenshot-1](./screenshot/1.jpg)
+
 ## Install
 `./install.sh`
 ## Usage
