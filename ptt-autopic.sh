@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 PIC_CACHE_DIR="$HOME/.bin/ptt-autopic.cache";
 init() {
