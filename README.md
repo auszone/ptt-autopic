@@ -5,8 +5,11 @@ Directly show images on iTerm2 with [imgcat](https://www.iterm2.com/documentatio
 
 ![Screenshot-1](./screenshot/1.jpg)
 
-## Install
-`./install.sh`
+## Installation
+### install
+`./install.sh install`
+### uninstall
+`./install.sh uninstall`
 ## Usage
 
 `ssh bbsu@ptt.cc | ptt-autopic`
