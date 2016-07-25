@@ -4,11 +4,7 @@
 PIC_CACHE_DIR="$HOME/.bin/ptt-autopic.cache";
 export PIC_CACHE_DIR
 init() {
-    if [ -d "$PIC_CACHE_DIR" ]; then
-        echo "$PIC_CACHE_DIR already exists";
-    else
-        mkdir $PIC_CACHE_DIR;
-    fi
+    mkdir -p $PIC_CACHE_DIR;
 }
 
 download_show_image() {
@@ -20,27 +16,22 @@ download_show_image() {
 export -f download_show_image
 
 find_images() {
-    awk '
-    BEGIN {FS="\/"}
-    {
+    gawk -F '/' '{
         if($3 ~ "imgur.com") {
             printf "\n\nDownload image : %s\n\n", $0;
             gsub(/jpg.*$/,"jpg",$4);
             gsub(/png.*$/,"png",$4);
             print "download_show_image", $4 | "/bin/bash";
             close("/bin/bash")
-            system("");
-        }
-        else {
+        } else {
             print;
         }
-    }
-    '
+        fflush();
+    }'
 }
 main() {
     init;
     find_images;
 }
-
 main
 
